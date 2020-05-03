@@ -4,7 +4,6 @@ const app = express()
 const port = 3000
 const { WebClient } = require('@slack/web-api');
 
-
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.post('/', async (req, res) => {
@@ -27,42 +26,28 @@ app.post('/', async (req, res) => {
       channel: 'C012YGSHMFD',
     })
 
-    let members2 = await slack.conversations.members ({
-      channel: 'C012YGSHMFD',
-    })
-
     let channelMembers = members['members'];
-    const testing = members2['members'];
-    let memberInfo = {}
     let user;
 
     let pairedMembers = {};
     let pairIndex, i;
 
-    console.log(testing)
+    while (channelMembers.length != 0) {
+      i = channelMembers.length - 1;
+      pairIndex = Math.floor(Math.random()*i);
+      pairedMembers[channelMembers[i]] = channelMembers[pairIndex];
+      pairedMembers[channelMembers[pairIndex]] = channelMembers[i];
+      channelMembers.splice(i, 1);
+      channelMembers.splice(pairIndex, 1);
+    }
 
-    // while (channelMembers.length != 0) {
-    //   i = channelMembers.length - 1;
-    //   pairIndex = Math.floor(Math.random()*i);
-    //   pairedMembers[channelMembers[i]] = channelMembers[pairIndex];
-    //   pairedMembers[channelMembers[pairIndex]] = channelMembers[i];
-    //   channelMembers.splice(i, 1);
-    //   channelMembers.splice(pairIndex, 1);
-    // }
-
-    console.log(testing)
-    testing.forEach(async (value) => {
-      user = await slack.users.profile.get({
-        user: value,
-      })
-      // console.log(user)
-      memberInfo[value] = await user['profile'];
-      // console.log(memberInfo[value]);
-  
-    })
     Object.keys(pairedMembers).forEach(async member => {
-      message = memberInfo[pairedMembers[member]]
-        await slack.chat.postMessage({
+      user = await slack.users.profile.get({
+        user: pairedMembers[member],
+      })
+      message = user['profile']['real_name'] + " is your KwikKonnect match! Here's how they're doing right now: " + user['profile']['status_text'] + "\n"
+      message += "Your 5min video call is scheduled for 12pm @ ourdomain.com/xyz. Have fun! :relaxed:"
+      await slack.chat.postMessage({
         channel: member,
         text: message,
       })
@@ -76,7 +61,7 @@ app.post('/', async (req, res) => {
     //   channelMembers.splice(pairIndex, 1);
     // }
 
-    res.send(memberInfo)
+    res.send("Everyone in #kwikkonnect was matched up!")
 })
 
 app.listen(port, () => console.log('Example app listening at http://localhost:${port}'))
