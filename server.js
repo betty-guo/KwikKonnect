@@ -1,9 +1,10 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 const { WebClient } = require('@slack/web-api');
-const slack = new WebClient('xoxp-1124198854688-1093628893830-1113059782897-94ebad573a234d91aa2d07ec8491f0dd')
+const slack = new WebClient(process.env.SLACK_KEY)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
