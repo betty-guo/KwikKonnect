@@ -10,9 +10,9 @@ app.use(bodyParser.json())
 
 app.post('/info', async (req, res) => {
   // basic info about KiwkKonnect
-  res.send("Hey there, I'm Kwikbot! I'm here to help you meet new people and stay connected, even when you're remote.\n"
+  res.send("Hey there, I'm kwikbot! I'm here to help you meet new people and stay connected, even when you're remote.\n"
     + "If you're a team member, join the #kwikkonnect channel to join in the fun! I'll notify you of matches every week, held through 2min video calls on the KiwkKonnect video platform.\n"
-    + "If you're a team owner, use /match to begin the matching process!");
+    + "If you're a team owner, use /kwikmatch to begin the matching process!");
 })
 
 app.post('/duration', async (req, res) => {
@@ -31,10 +31,12 @@ app.post('/match', async (req, res) => {
       channel: 'C012YGSHMFD', // #kiwkkonnect channel
     })
 
-    let channelMembers = members['members']
+    let channelMembers = members['members'];
+    let channelCopy = channelMembers.slice(0);
 
     // pairing up channel members
     let pairedMembers = {};
+    let pairs = []
     let pairIndex, i;
     while (channelMembers.length != 0) {
       i = channelMembers.length - 1;
@@ -42,6 +44,8 @@ app.post('/match', async (req, res) => {
       let endpoint = Math.floor(Math.random()*1000); 
       pairedMembers[channelMembers[i]] = [channelMembers[pairIndex], endpoint];
       pairedMembers[channelMembers[pairIndex]] = [channelMembers[i], endpoint];
+      pairs.push(channelMembers[pairIndex].slice(0));
+      pairs.push(channelMembers[i].slice(0));
       channelMembers.splice(i, 1);
       channelMembers.splice(pairIndex, 1);
     }
@@ -62,7 +66,38 @@ app.post('/match', async (req, res) => {
       })
     })
 
-    res.send("Everyone in #kwikkonnect was matched up!")
+    // privately relaying the matches to matcher
+    res.write("Everyone in #kwikkonnect was matched up! :tada:\nHere are this round's matches: ")
+    waiting = pairs.length;
+    pairs.reduce(async (promise, elem) => {
+      await promise;
+      const user = await slack.users.profile.get({
+        user: elem
+      })
+      console.log(elem);
+      res.write(user['profile']['real_name']);
+      if (waiting%2 == 0) {
+        res.write(" & ");
+      } else if (waiting != 1) {
+        res.write(", ")
+      }
+      finish();
+    }, Promise.resolve());
+    
+    function finish() {
+      waiting --;
+      if (waiting == 0) {
+        console.log(pairs)
+        res.write("\nHappy konnecting!")
+        res.end();
+      }
+    }
+    // res.end();
+
+    // console.log(pairs)
+    // console.log(resMessage)
+    // res.send(resMessage);
+    // res.send("Everyone in #kwikkonnect was matched up!")
 })
 
 const server = app.listen(8080, () => {
