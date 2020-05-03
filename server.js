@@ -12,7 +12,8 @@ app.post('/info', async (req, res) => {
   // basic info about KiwkKonnect
   res.send("Hey there, I'm kwikbot! I'm here to help you meet new people and stay connected, even when you're remote.\n"
     + "If you're a team member, join the #kwikkonnect channel to join in the fun! I'll notify you of matches every week, held through 2min video calls on the KiwkKonnect video platform.\n"
-    + "If you're a team owner, use /kwikmatch to begin the matching process!");
+    + "If you're a team owner, use /kwikmatch to begin the matching process!\n"
+    + "Pro Tip: Use /kwikduration to edit the length of the calls and /kwikfrequency to schedule recurring matches!");
 })
 
 app.post('/duration', async (req, res) => {
