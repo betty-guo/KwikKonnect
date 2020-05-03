@@ -20,9 +20,5 @@ We used Express.js and Node.js in Javascript to build both the bot and the video
 ## Challenges we ran into
 We found it hard to decide on an idea at first, as we wanted to develop something related to social good and improving the current situation, but we didn't know which tools we should try to use. After we decided on the final idea, we realized that none of us had any experience in programming a Slack bot, so it was a challenge working through it all the way from development to deployment.
 
-## Accomplishments that we're proud of
-
-## What we learned
-
 ## What's next for KwikKonnect
 In the future, we hope to expand KwikKonnect to other popular platforms such as Discord to further facilitate conversations between others and bring the world closer together from the safety of their own homes.
