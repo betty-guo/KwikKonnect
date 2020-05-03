@@ -18,12 +18,12 @@ app.post('/info', async (req, res) => {
 
 app.post('/duration', async (req, res) => {
   // set the duration for KwikKonnect calls
-  res.send("You got it! All KwikKonnect video calls will now be "  + req['body']['text'] + " in length!");
+  res.send("You got it! All KwikKonnect video calls will now be "  + req['body']['text'] + " minutes in length!");
 })
 
 app.post('/frequency', async (req, res) => {
   // set the frequency of KwikKonnect matches
-  res.send("On it! KwikKonnect matches will now occur every " + req['body']['text'] + "!");
+  res.send("On it! KwikKonnect matches will now occur every " + req['body']['text'] + " days!");
 })
 
 app.post('/match', async (req, res) => {
