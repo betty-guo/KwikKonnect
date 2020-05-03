@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const port = 3000
 const { WebClient } = require('@slack/web-api');
 const slack = new WebClient(process.env.SLACK_KEY)
 
@@ -51,4 +50,9 @@ app.post('/', function (req, res) {
     res.sendStatus(200)
 })
 
-app.listen(port, () => console.log('Example app listening at http://localhost:${port}'))
+const server = app.listen(8080, () => {
+  const host = server.address().address;
+  const port = server.address().port;
+
+  console.log(`Example app listening at http://${host}:${port}`);
+});
