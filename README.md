@@ -1,3 +1,5 @@
+<a href="https://slack.com/oauth/v2/authorize?client_id=1124198854688.1098998323013&scope=channels:history,channels:read,chat:write,commands,im:write,incoming-webhook,pins:read,reactions:read,users:read,groups:read,users.profile:read"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+
 # KwikKonnect
 [TOHacks 2020] A Slackbot and web platform that matches people for spontaneous 2-minute video calls.
 ![Logo](logo.png)
