@@ -1,5 +1,6 @@
 # KwikKonnect
 [TOHacks 2020] A Slackbot and web platform that matches people for spontaneous 2-minute video calls.
+![Logo](KwikKonnect Logo.png)
 
 ## Inspiration
 With COVID-19 impacting many social and organizational aspects of everyday life, we wanted to develop something that would mitigate the loneliness of social isolation and allow users to stay engaged within their teams and friend groups. Thus, we designed KwikKonnect, a Slack bot and video chat platform which facilitates spontaneous video calls within groups, in the hopes of helping people make new friends and stay close with the ones they already have.
