@@ -28,7 +28,8 @@ app.post('/frequency', async (req, res) => {
 app.post('/match', async (req, res) => {
     // getting channel members
     let members = await slack.conversations.members ({
-      channel: 'C012YGSHMFD', // #kiwkkonnect channel
+      channel: 'C012HM9QMP1', // #kiwkkonnect channel
+      // C012YGSHMFD is #random
     })
 
     let channelMembers = members['members'];
