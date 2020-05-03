@@ -17,7 +17,7 @@ app.post('/info', async (req, res) => {
 
 app.post('/match', async (req, res) => {
     // getting channel members
-    let members = await slack.conversations.members ({
+    let channelMembers = await slack.conversations.members ({
       channel: 'C012YGSHMFD', // #kiwkkonnect channel
     })
 
