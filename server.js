@@ -40,7 +40,11 @@ app.post('/match', async (req, res) => {
         user: pairedMembers[member],
       })
       message = user['profile']['real_name'] + " is your KwikKonnect match! Here's how they're doing right now: " + user['profile']['status_text'] + "\n"
+<<<<<<< HEAD
       message += "Your 5min video call is scheduled for 12pm at www.kwikkonnect.online.\n"
+=======
+      message += "Your 5min video call is scheduled for 12pm at ourdomain.com/xyz.\n"
+>>>>>>> 55412226ad9e907cf4b53448d88e0c05733a568d
       message += "Have fun! :relaxed:"
       await slack.chat.postMessage({
         channel: member,
