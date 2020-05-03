@@ -34,7 +34,6 @@ app.post('/match', async (req, res) => {
 
     let channelMembers = members['members'];
     let channelCopy = channelMembers.slice(0);
-
     // pairing up channel members
     let pairedMembers = {};
     let pairs = []
@@ -59,7 +58,8 @@ app.post('/match', async (req, res) => {
       })
       
       message = user['profile']['real_name'] + " is your KwikKonnect match! Here's how they're doing right now: " + user['profile']['status_text'] + "\n"
-      message += "Your 2min video call is scheduled for 12pm at ourdomain.com/" + pairedMembers[member][1] + ".\n"
+      message += "Your 2min video call is scheduled for 12pm at www.kwikkonnect.online" + pairedMembers[member][1] + ".\n"
+        
       message += "Have fun! :relaxed:"
       await slack.chat.postMessage({
         channel: member,
